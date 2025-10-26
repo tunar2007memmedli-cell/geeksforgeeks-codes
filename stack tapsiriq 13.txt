@@ -1,0 +1,31 @@
+from queue import Queue
+
+def t(q, k):
+    if q.empty() or k <= 0 or k > q.qsize():
+        return q  
+
+    stack = []  
+    for _ in range(k):
+        stack.append(q.get())
+
+ 
+    while stack:
+        q.put(stack.pop())
+
+   
+    size = q.qsize()
+    for _ in range(size - k):
+        q.put(q.get())
+
+    return q
+
+
+q = Queue()
+for i in [1, 2, 3, 4, 5]:
+    q.put(i)
+
+k = 3
+print("Original Queue:", list(q.queue))
+
+t(q, k)
+print(f"Queue after reversing first {k} elements:", list(q.queue))
