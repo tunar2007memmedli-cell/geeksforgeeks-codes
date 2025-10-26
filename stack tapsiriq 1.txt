@@ -1,0 +1,42 @@
+def t(mat, n):
+    stack = [i for i in range(n)]
+
+    while len(stack) > 1:
+        a = stack.pop()
+        b = stack.pop()
+
+        if mat[a][b] == 1:
+          
+            stack.append(b)
+        else:
+           
+            stack.append(a)
+
+    if not stack:
+        return -1
+
+    c = stack.pop()
+
+   
+    for i in range(n):
+        if i != c and (mat[c][i] == 1 or mat[i][c] == 0):
+            return -1
+
+    return c
+
+# Numuneler:
+mat1 = [
+    [1, 1, 0],
+    [0, 1, 0],
+    [0, 1, 1]
+]
+print(t(mat1, 3))  
+
+mat2 = [
+    [1, 1],
+    [1, 1]
+]
+print(t(mat2, 2))  
+
+mat3 = [[1]]
+print(t(mat3, 1))
